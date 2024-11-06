@@ -42,7 +42,8 @@ async def secure_endpoint():
 @app.get("/coin/get-rates/{currency}", name="Get Currency Rate", dependencies=[Depends(api_key_security)],
          )
 async def get_currency_rate(currency: str):
-    currency = await make_request("GET", f"currency/rate", params={"currency": currency})
+    print(f"currency passed: {currency}")
+    currency = make_request("GET", f"currency/rate", params={"currency": currency})
 
     if not currency:
         raise HTTPException(status_code=404, detail="Currency not found")
