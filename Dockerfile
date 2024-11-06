@@ -1,5 +1,14 @@
 FROM python:3.12-slim AS python-base
 
+# Install Poetry and system dependencies for building packages
+RUN apt-get update && \
+    apt-get install -y \
+        gcc \
+        python3-dev \
+        libpq-dev \
+        build-essential && \
+    pip install poetry==1.8.3
+
 # https://python-poetry.org/docs#ci-recommendations
 ENV POETRY_VERSION=1.2.0
 ENV POETRY_HOME=/opt/poetry
@@ -52,5 +61,5 @@ COPY . /app
 # Run Application
 EXPOSE 8000
 
-CMD ["dotenvx", "run", "--", "pipx", "run", "poetry", "run", "fastapi", "run", "api/main.py", "--port", "8000"]
-# CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# CMD ["dotenvx", "run", "--", "pipx", "run", "poetry", "run", "fastapi", "run", "api/main.py", "--port", "8000"]
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
