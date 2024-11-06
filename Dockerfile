@@ -1,5 +1,5 @@
 # Base stage with Python and Poetry installation
-FROM python:3.11 AS python-base
+FROM python:3.12-slim AS python-base
 
 # Set Poetry version and paths
 ENV POETRY_VERSION=1.2.0
