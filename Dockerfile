@@ -14,7 +14,7 @@ RUN python3 -m venv $POETRY_VENV \
     && $POETRY_VENV/bin/pip install poetry==${POETRY_VERSION}
 
 # Application build stage
-FROM python:3.11 AS example-app
+FROM python:3.12-slim AS example-app
 
 # Copy Poetry environment from the base stage
 COPY --from=python-base ${POETRY_VENV} ${POETRY_VENV}
